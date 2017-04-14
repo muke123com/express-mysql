@@ -12,11 +12,7 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/list', function(req, res, next) {
-  res.render('note/list', {
-    title: '笔记'
-  })
-});
+
 router.get('/getNotelist', function(req, res, next) {
   Note.findAll({}).then(function(data) {
     res.send(data);

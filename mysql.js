@@ -1,12 +1,12 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('member', 'root', 'root', {
+var sequelize = new Sequelize('mkk', 'root', '123456', {
   host: 'localhost',
   port: '3306',
   dialect: 'mysql',
 })
 sequelize.authenticate()
 .then(function(err) {
-  console.log('连接成功.');
+  console.log('connect success');
 })
 .catch(function (err) {
   console.log(err);
