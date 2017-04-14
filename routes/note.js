@@ -14,10 +14,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getNotelist', function(req, res, next) {
-  Note.findAll({}).then(function(data) {
+  Note.findAll({order : 'createdAt desc'}).then(function(data) {
     res.send(data);
   })
 });
+
+router.post('/readNote', function(req, res, next) {
+  let id = req.body.id;
+  sequelize.query('update m_note set readcount_actual = readcount_actual +1 where id =' + id);
+})
+
 router.post('/getNoteDetail', function(req, res, next) {
   let id = req.body.id;
   Note.findAll({
@@ -28,7 +34,7 @@ router.post('/getNoteDetail', function(req, res, next) {
     res.send(data);
   })
 });
-router.post('/addNotelist', function(req, res, next) {
+router.post('/saveNote', function(req, res, next) {
   let data = req.body;
   var nowDate = new Date(new Date().getTime() + 28800000);
   data.createdAt = nowDate;
@@ -37,7 +43,7 @@ router.post('/addNotelist', function(req, res, next) {
     res.send({'msg': 'add success'});
   })
 });
-router.post('/editNotelist', function(req, res, next) {
+router.post('/updateNote', function(req, res, next) {
   let id = req.body.id;
   let data = req.body;
   var nowDate = new Date(new Date().getTime() + 28800000);
